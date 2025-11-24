@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +24,7 @@
   /* Bullet list slide */
   .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
 
-  /* NOUVEAU: Style pour le bouton plein écran */
+  /* Style du bouton Plein Écran */
   .fullscreen-button {
     position: fixed;
     top: 15px;
@@ -73,7 +73,7 @@
        <br>
        C'est cette nouvelle dimension de la pensée spéculative qui rendra possibie l'éclosion du récit de genre d'anticipation.
     </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
+    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS 11695.jpg');"></span>
   </section>
  
  <section class="slide" style="background:#111;">
@@ -83,7 +83,7 @@
       <h3>Fragments d’un futur discret</h3>
       <p>Dans un monde flottant entre certitude et mirage, les mots se tissent en réseaux fluides, révélant des perspectives inattendues.</p>
     </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
+    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS 11695.jpg');"></span>
   </section>
 
   <section class="slide" style="background:#111;">
@@ -93,7 +93,7 @@
       <h3>Les formes du visible</h3>
       <p>Les contours se dissipent tandis que la lumière révèle l’essence du mouvement, laissant aux ombres le soin de compléter le sens.</p>
     </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
+    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS 11695.jpg');"></span>
   </section>
 
   <section class="slide" style="background:#111;">
@@ -103,7 +103,7 @@
       <h3>Cartographie intérieure</h3>
       <p>À mesure que la frontière se dissout, les connexions se reforment, révélant des trajectoires que la logique seule ne pouvait tracer.</p>
     </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
+    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS 11695.jpg');"></span>
   </section>
 
     <section class="slide" id="bulletSlide" style="background:#111;">
@@ -210,4 +210,70 @@ function finalizeBulletsAndCreateSlide() {
       <h3>${subs[Math.floor(Math.random()*subs.length)]}</h3>
       <p>${paras[Math.floor(Math.random()*paras.length)]}</p>
     </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0d/Orthodox-Apocalypse-Fresco.jpg=${Date.now
+        <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0d/Orthodox-Apocalypse-Fresco.jpg?v=${Date.now()}');"></span>
+  `;
+
+  document.getElementById('slides').appendChild(newSection);
+
+  // refresh slides array and go to the new slide
+  slides = Array.from(document.querySelectorAll('.slide'));
+  index = slides.length - 1;
+  layoutSlides();
+}
+
+/**
+ * Fonction pour basculer en mode plein écran ou en sortir.
+ * Met également à jour le texte du bouton.
+ */
+function toggleFullscreen() {
+  const button = document.getElementById('fullscreenToggle');
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    button.textContent = 'Quitter Écran';
+  } else {
+    document.exitFullscreen();
+    button.textContent = 'Plein Écran';
+  }
+}
+
+// Assigner la fonction au clic du bouton
+document.getElementById('fullscreenToggle').addEventListener('click', toggleFullscreen);
+
+// Mettre à jour le texte du bouton lorsque le mode plein écran change (ex: via touche Échap)
+document.addEventListener('fullscreenchange', () => {
+    const button = document.getElementById('fullscreenToggle');
+    if (document.fullscreenElement) {
+        button.textContent = 'Quitter Écran';
+    } else {
+        button.textContent = 'Plein Écran';
+    }
+});
+
+window.addEventListener('keydown', e => {
+  // Fullscreen toggle (F)
+  if (e.key.toLowerCase() === 'f') {
+    toggleFullscreen();
+    return;
+  }
+
+  // If on bullet slide
+  if (index === slides.length - 1) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === 'ArrowDown') {
+      // add bullet
+      addBullet();
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      // finalize and create new slide
+      finalizeBulletsAndCreateSlide();
+      return;
+    }
+  }
+
+  // normal navigation
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') previous();
+});
+</script>
+</body>
+</html>
