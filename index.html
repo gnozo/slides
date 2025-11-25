@@ -7,297 +7,349 @@
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 100%; height: 100%; overflow: hidden; background: #111; color: #fff; font-family: 'Raleway', sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #111; color: #fff; font-family: 'Raleway', sans-serif; }
 
-  .slides { width: 100%; height: 100%; position: relative; overflow: hidden; }
-  
-  .slide { 
-    width: 100%; 
-    height: 100%; 
-    position: absolute; 
-    top: 0; 
-    /* Flexbox used for vertical centering only */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    /* Removed padding to strictly control horizontal margins via content-box */
-    padding: 0; 
-    transition: transform 0.6s ease; 
-  }
+  .slides { width: 100%; height: 100%; position: relative; overflow: hidden; }
+  
+  .slide { 
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    /* Flexbox used for vertical centering only */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    /* Removed padding to strictly control horizontal margins via content-box */
+    padding: 0; 
+    transition: transform 0.6s ease; 
+  }
 
-  .content-box { 
-    /* STRICT SPAN CALCULATION:
-       Total Width: 100%
-       Image Width: 55% (Occupies right side)
-       Gap required: 10%
-       Left Margin required: 10%
-       
-       Remaining Width for Text = 100% - 55% - 10% - 10% = 25%
-    */
-    width: 25%; 
-    margin-left: 10%; /* 10% from left border */
-    margin-right: auto; /* Pushes away from the right side */
-    z-index: 2; 
-    position: relative; /* Ensures z-index works */
-  }
+  .content-box { 
+    /* STRICT SPAN CALCULATION:
+       Total Width: 100%
+       Image Width: 55% (Occupies right side)
+       Gap required: 10%
+       Left Margin required: 10%
+       
+       Remaining Width for Text = 100% - 55% - 10% - 10% = 25%
+    */
+    width: 25%; 
+    margin-left: 10%; /* 10% from left border */
+    margin-right: auto; /* Pushes away from the right side */
+    z-index: 2; 
+    position: relative; /* Ensures z-index works */
+  }
 
-  .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; text-transform: uppercase; letter-spacing: 2px;}
-  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; word-wrap: break-word; } /* Added word-wrap for safety */
-  .content-box h3 { font-size: 1.2rem; opacity: 0.9; margin-top: 0.3rem; text-align: left; }
-  .content-box p { font-size: 1rem; margin-top: 1rem; opacity: 0.85; line-height: 1.4; text-align: left; }
-  
-  .quote-ref { font-variant: small-caps; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #444; padding-top: 0.5rem; display: inline-block;}
+  .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; text-transform: uppercase; letter-spacing: 2px;}
+  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; word-wrap: break-word; } /* Added word-wrap for safety */
+  .content-box h3 { font-size: 1.2rem; opacity: 0.9; margin-top: 0.3rem; text-align: left; }
+  .content-box p { font-size: 1rem; margin-top: 1rem; opacity: 0.85; line-height: 1.4; text-align: left; }
+  
+  .quote-ref { font-variant: small-caps; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #444; padding-top: 0.5rem; display: inline-block;}
 
-  .image-box { 
-    position: absolute; 
-    right: 0; top: 0; 
-    width: 55%; /* Fixed width */
-    height: 100%; 
-    background-size: cover; background-position: center; 
-    opacity: 0.8; 
-    z-index: 1; 
-  }
+  .image-box { 
+    position: absolute; 
+    right: 0; top: 0; 
+    width: 55%; /* Fixed width */
+    height: 100%; 
+    background-size: cover; background-position: center; 
+    opacity: 0.8; 
+    z-index: 1; 
+  }
 
-  .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
-  
-  .fullscreen-button {
-    position: fixed; top: 15px; right: 15px; z-index: 100;
-    cursor: pointer; background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
-    padding: 5px 12px; border-radius: 4px; font-size: 0.8rem;
-    transition: opacity 0.3s ease, background 0.3s ease; opacity: 0.5;
-  }
-  .fullscreen-button:hover { opacity: 1; background: rgba(255, 255, 255, 0.2); }
+  .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
+  
+  .fullscreen-button {
+    position: fixed; top: 15px; right: 15px; z-index: 100;
+    cursor: pointer; background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+    padding: 5px 12px; border-radius: 4px; font-size: 0.8rem;
+    transition: opacity 0.3s ease, background 0.3s ease; opacity: 0.5;
+  }
+  .fullscreen-button:hover { opacity: 1; background: rgba(255, 255, 255, 0.2); }
 </style>
 </head>
 
 <body>
 <div class="slides" id="slides">
 
-  <section class="slide" style="background:#111;">
-    <div class="content-box">
-      <h2>Préhistoire et Récit Spéculatif</h2>
-      <h1>La Préhistoire dessine-t-elle les limites <br>du récit spéculatif ?</h1>
-      <br>
-      <h3>Benjamin Efrati - Doctorant CRAL - EHESS/CNRS</h3>
-      <br>
-      <p>Time World - 4.12.2025 - Besançon</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true');"></span>
-  </section>
+  <section class="slide" style="background:#111;">
+    <div class="content-box">
+      <h2>Préhistoire et Récit Spéculatif</h2>
+      <h1>La Préhistoire dessine-t-elle les limites <br>du récit spéculatif ?</h1>
+      <br>
+      <h3>Benjamin Efrati - Doctorant CRAL - EHESS/CNRS</h3>
+      <br>
+      <p>Time World - 4.12.2025 - Besançon</p>
+    </div>
+    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true');"></span>
+  </section>
 
-  <section class="slide" style="background:#111;">
-    <div class="content-box">
-      <h2>Préhistoire et Récit Spéculatif</h2>
-      <h1>Contexte Historique</h1>
-      <h3>Retour au XIXe siècle</h3>
-    <p>Avec l'émergence de l'archéologie préhistorique, les "curiosités antédiluviennes" de Boucher de Perthes ouvrent la boîte de Pandore un imaginaire du temps profond.</p>
-    <p>Ce dernier s'impose d'abord comme une alternative à l'imaginaire biblique, mais il reste chargé d'allusions aux prophéties apocalyptiques et catastrophes créationnistes.</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/silos.jpg?raw=true');"></span>
-  </section>
+  <section class="slide" style="background:#111;">
+    <div class="content-box">
+      <h2>Préhistoire et Récit Spéculatif</h2>
+      <h1>Contexte Historique</h1>
+      <h3>Retour au XIXe siècle</h3>
+    <p>Avec l'émergence de l'archéologie préhistorique, les "curiosités antédiluviennes" de Boucher de Perthes ouvrent la boîte de Pandore un imaginaire du temps profond.</p>
+    <p>Ce dernier s'impose d'abord comme une alternative à l'imaginaire biblique, mais il reste chargé d'allusions aux prophéties apocalyptiques et catastrophes créationnistes.</p>
+    </div>
+    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/silos.jpg?raw=true');"></span>
+  </section>
 
-  <section class="slide" style="background:#111;">
-    <div class="content-box">
-      <h2>1.1</h2>
-      <h1>Fiction spéculative ?</h1>
-      <h3>Terme générique désignant des oeuvres de fiction qui explorent rationnellement des hypothèses sur le futur ou des conditions alternatives au réel</h3>
-      <p>L’expression de “fiction spéculative” a été introduite par Robert A. Heinlein - “On the Writing of Speculative Fiction” (1947)</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
-  </section>
+  <section class="slide" style="background:#111;">
+    <div class="content-box">
+      <h2>1.1</h2>
+      <h1>Fiction spéculative ?</h1>
+      <h3>Terme générique désignant des oeuvres de fiction qui explorent rationnellement des hypothèses sur le futur ou des conditions alternatives au réel</h3>
+      <p>L’expression de “fiction spéculative” a été introduite par Robert A. Heinlein - “On the Writing of Speculative Fiction” (1947)</p>
+    </div>
+    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
+  </section>
 
-  <section class="slide" style="background:#111;">
-    <div class="content-box">
-      <h2>1.2</h2>
-      <h1>Le terme désigne des récits de science-fiction sans fantasy</h1>
-      <h3>Heinlein range les récits dans deux grandes catégories : gadgets et personnes. trois modèles : garçon rencontre fille (boy meets girl) trop tôt, trop tard, etc, l’homme découvre mieux (man learns better), et l’histoire du petit tailleur (the little tailor), la success story ou l’inverse.</h3>
-      <p>Pour rendre compte de la création d’un récit, Heinlein étudie la manière dont les récits sont fabriqués, et les ramène à une polarité artefact-conscience, qu’il décline sous trois prismes de base.</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
-  </section>
+  <section class="slide" style="background:#111;">
+    <div class="content-box">
+      <h2>1.2</h2>
+      <h1>Le terme désigne des récits de science-fiction sans fantasy</h1>
+      <h3>Heinlein range les récits dans deux grandes catégories : gadgets et personnes. trois modèles : garçon rencontre fille (boy meets girl) trop tôt, trop tard, etc, l’homme découvre mieux (man learns better), et l’histoire du petit tailleur (the little tailor), la success story ou l’inverse.</h3>
+      <p>Pour rendre compte de la création d’un récit, Heinlein étudie la manière dont les récits sont fabriqués, et les ramène à une polarité artefact-conscience, qu’il décline sous trois prismes de base.</p>
+    </div>
+    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
+  </section>
 
-  <section class="slide gag-slide" style="background:#111;">
-    <div class="content-box">
-      <h2>Analyse Systémique</h2>
-      <h1>Points Essentiels</h1>
-      <ul class="bullet-list"></ul>
-      <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">
-        → <br>
-        ↑ 
-      </p>
-    </div>
-  </section>
-
-  <section class="slide" style="background:#111;">
-    <div class="content-box">
-      <h2>1.3</h2>
-      <h1>Autres apports et définitions de la fiction spéculative</h1>
-      <h3>Depuis lors.</h3>
-      <p>ca fait un bail.</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
-  </section>
+    <section class="slide gag-slide" id="gagSlide1" style="background:#111;">
+    <div class="content-box">
+      <h2>Analyse Systémique</h2>
+      <h1>Points Essentiels</h1>
+      <ul class="bullet-list"></ul>
+      <p class="gag-instructions"></p> 
+    </div>
+  </section>
+    <section class="slide" style="background:#111;">
+    <div class="content-box">
+      <h2>1.3</h2>
+      <h1>Autres apports et définitions de la fiction spéculative</h1>
+      <h3>Depuis lors.</h3>
+      <p>ca fait un bail.</p>
+    </div>
+    <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/daniel.gif?raw=true');"></span>
+  </section>
 
 </div>
 
 <button id="fullscreenToggle" class="fullscreen-button">Plein Écran</button>
 
 <script>
-// --- CONFIGURATION ---
+// --- CONFIGURATION & TEMPLATES ---
 const IMG_GITHUB = 'https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true';
 const BATCH_SIZE = 10; // Nombre de diapos générées après la liste
 let globalSlideCounter = 1; // Pour les titres incrémentiels
+
+// Phrases aléatoires pour le "Bullshit Bingo" des puces
+const randomBullets = [
+  "Le réseau révèle l’invisible.",
+  "La structure donne sens au mouvement.",
+  "Les systèmes émergent du chaos.",
+  "La perception façonne la réalité.",
+  "Synergie des vecteurs cognitifs.",
+  "Itération des paradigmes fossiles.",
+  "Convergence des temporalités."
+];
+
+// NOUVEAU : Tableau des templates de Gag Slides pour réutilisation facile
+const GAG_SLIDE_TEMPLATES = [
+  { 
+    H2: "Analyse Systémique",
+    H1: "Points Essentiels",
+    INSTRUCTIONS: `→ Ajouter point : Flèche Droite / Bas <br> ↑ Sortir de la boucle et continuer la conférence`
+  },
+  {
+    H2: "Synthèse Paradigmes",
+    H1: "Réseaux Sémantiques",
+    INSTRUCTIONS: `→ Poursuivre la déconstruction. <br> ↑ Stabiliser et progresser`
+  },
+  // Ajoutez d'autres Gag Slides ici en copiant/collant ce bloc
+];
+let currentGagTemplateIndex = 0;
 
 // --- ETAT GLOBAL ---
 let slides = Array.from(document.querySelectorAll('.slide'));
 let index = 0;
 
-// Phrases aléatoires pour le "Bullshit Bingo" des puces
-const randomBullets = [
-  "Le réseau révèle l’invisible.",
-  "La structure donne sens au mouvement.",
-  "Les systèmes émergent du chaos.",
-  "La perception façonne la réalité.",
-  "Synergie des vecteurs cognitifs.",
-  "Itération des paradigmes fossiles.",
-  "Convergence des temporalités."
-];
+// Fonction utilitaire pour mettre à jour l'array des slides
+function updateSlidesArray() {
+  slides = Array.from(document.querySelectorAll('.slide'));
+}
 
-// Initialisation
+// Initialisation du contenu de la première Gag Slide (Séparation HTML/JS)
+function initializeGagSlides() {
+  const template = GAG_SLIDE_TEMPLATES[0];
+  const slide1 = document.getElementById('gagSlide1');
+
+  if(slide1) {
+    slide1.querySelector('h2').textContent = template.H2;
+    slide1.querySelector('h1').textContent = template.H1;
+    slide1.querySelector('.gag-instructions').innerHTML = `<p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">${template.INSTRUCTIONS}</p>`;
+  }
+}
+initializeGagSlides();
+
+
+// --- NAVIGATION & LAYOUT ---
 function layoutSlides() {
-  slides.forEach((slide, i) => {
-    slide.style.transform = `translateX(${(i - index) * 100}%)`;
-  });
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${(i - index) * 100}%)`;
+  });
 }
 layoutSlides();
 
-// --- NAVIGATION ---
+
 function next() {
-  if (index < slides.length - 1) {
-    index++;
-    layoutSlides();
-  } else {
-    let currentSlide = slides[index];
-    if (currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
-      addBullet(currentSlide);
-    }
-  }
+  updateSlidesArray(); 
+  
+  // Si on est sur une slide normale, on avance
+  if (index < slides.length - 1) {
+    index++;
+    layoutSlides();
+  } else {
+    // Si on est à la toute fin, vérifier si c'est une gag-slide non 'gelée' (active)
+    let currentSlide = slides[index];
+    if (currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
+      addBullet(currentSlide);
+    }
+  }
 }
 
 function previous() {
-  if (index > 0) {
-    index--;
-    layoutSlides();
-  }
+  if (index > 0) {
+    index--;
+    layoutSlides();
+  }
 }
 
 // --- LOGIQUE DU GAG (Liste à puces) ---
 
 function addBullet(slideElement) {
-  const list = slideElement.querySelector('.bullet-list');
-  const text = randomBullets[Math.floor(Math.random() * randomBullets.length)];
-  const li = document.createElement('li');
-  li.textContent = text;
-  list.appendChild(li);
-  requestAnimationFrame(() => { li.style.opacity = 1; });
+  const list = slideElement.querySelector('.bullet-list');
+  const text = randomBullets[Math.floor(Math.random() * randomBullets.length)];
+  const li = document.createElement('li');
+  li.textContent = text;
+  list.appendChild(li);
+  requestAnimationFrame(() => { li.style.opacity = 1; });
 }
 
 function triggerBatchGeneration(currentSlideElement) {
-  currentSlideElement.classList.add('frozen');
-  const list = currentSlideElement.querySelector('.bullet-list');
-  if(list) list.style.opacity = 0.5;
+  currentSlideElement.classList.add('frozen');
+  const list = currentSlideElement.querySelector('.bullet-list');
+  if(list) list.style.opacity = 0.5;
 
-  for (let i = 0; i < BATCH_SIZE; i++) {
-    createNormalSlide();
-  }
+  // Trouver l'index de la prochaine gag slide à utiliser
+  currentGagTemplateIndex = (currentGagTemplateIndex + 1) % GAG_SLIDE_TEMPLATES.length;
 
-  createGagSlide();
+  // 1. Créer le lot de slides normales
+  for (let i = 0; i < BATCH_SIZE; i++) {
+    createNormalSlide();
+  }
+  
+  // 2. Créer la prochaine Gag Slide (pour le prochain cycle)
+  createGagSlide(GAG_SLIDE_TEMPLATES[currentGagTemplateIndex]);
 
-  slides = Array.from(document.querySelectorAll('.slide'));
-  index++; 
-  layoutSlides();
+  // Mettre à jour l'array des slides APRÈS la création des éléments
+  updateSlidesArray(); 
+
+  // On passe automatiquement à la première slide nouvellement créée
+  index++; 
+  layoutSlides();
 }
 
 // --- GÉNÉRATEURS DE DOM ---
 
 function createNormalSlide() {
-  const section = document.createElement('section');
-  section.className = 'slide';
-  section.style.background = '#111';
-  
-  const titleNum = globalSlideCounter++;
-  
-  section.innerHTML = `
-    <div class="content-box">
-      <h2>Vérification séquentielle</h2>
-      <h1>Préhistoire et Anticipation #${titleNum}</h1>
-      <h3>Suite et fin</h3>
-      <p>Merci pour votre attention..</p>
-      <div class="quote-ref">EFRATI B. 2025, Notes de terrain, Besançon.</div>
-    </div>
-    <span class="image-box" style="background-image:url('${IMG_GITHUB}');"></span>
-  `;
-  
-  document.getElementById('slides').appendChild(section);
+  const section = document.createElement('section');
+  section.className = 'slide';
+  section.style.background = '#111';
+  
+  const titleNum = globalSlideCounter++;
+  
+  section.innerHTML = `
+    <div class="content-box">
+      <h2>Vérification séquentielle</h2>
+      <h1>Préhistoire et Anticipation #${titleNum}</h1>
+      <h3>Suite et fin</h3>
+      <p>Merci pour votre attention..</p>
+      <div class="quote-ref">EFRATI B. 2025, Notes de terrain, Besançon.</div>
+    </div>
+    <span class="image-box" style="background-image:url('${IMG_GITHUB}');"></span>
+  `;
+  
+  document.getElementById('slides').appendChild(section);
 }
 
-function createGagSlide() {
-  const section = document.createElement('section');
-  section.className = 'slide gag-slide';
-  section.style.background = '#111';
-  
-  section.innerHTML = `
-    <div class="content-box">
-      <h2>Retour de l'Analyse</h2>
-      <h1>Points Essentiels (Suite)</h1>
-      <ul class="bullet-list"></ul>
-      <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">
-        → Ajouter point : Flèche Droite / Bas <br>
-        ↑ Sortir de la boucle et continuer
-      </p>
-    </div>
-  `;
-  
-  document.getElementById('slides').appendChild(section);
+// NOUVEAU : Fonction qui utilise le template JS pour construire la gag slide
+function createGagSlide(template) {
+  const section = document.createElement('section');
+  section.className = 'slide gag-slide';
+  section.style.background = '#111';
+  
+  section.innerHTML = `
+    <div class="content-box">
+      <h2>${template.H2}</h2>
+      <h1>${template.H1}</h1>
+      <ul class="bullet-list"></ul>
+      <p class="gag-instructions">
+        <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">
+          ${template.INSTRUCTIONS}
+        </p>
+      </p>
+    </div>
+  `;
+  
+  document.getElementById('slides').appendChild(section);
 }
 
 // --- CONTRÔLES CLAVIER ---
 
 window.addEventListener('keydown', e => {
-  if (e.key.toLowerCase() === 'f') {
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-    else document.exitFullscreen();
-    return;
-  }
+  if (e.key.toLowerCase() === 'f') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+    return;
+  }
 
-  const currentSlide = slides[index];
-  const isGagSlide = currentSlide.classList.contains('gag-slide');
-  const isFrozen = currentSlide.classList.contains('frozen');
+  // On s'assure que slides est toujours à jour pour un contrôle clavier immédiat
+  updateSlidesArray(); 
+  
+  const currentSlide = slides[index];
+  const isGagSlide = currentSlide.classList.contains('gag-slide');
+  const isFrozen = currentSlide.classList.contains('frozen');
 
-  if (isGagSlide && !isFrozen) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
-      addBullet(currentSlide);
-      return; 
-    }
-    if (e.key === 'ArrowUp') {
-      triggerBatchGeneration(currentSlide);
-      return;
-    }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-      previous();
-      return;
-    }
-  }
+  if (isGagSlide && !isFrozen) {
+    // Comportement des puces (Flèches Droite/Bas)
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+      addBullet(currentSlide);
+      return; 
+    }
+    // Comportement de sortie (Flèche Haut)
+    if (e.key === 'ArrowUp') {
+      triggerBatchGeneration(currentSlide);
+      return;
+    }
+    // Navigation normale vers l'arrière
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      previous();
+      return;
+    }
+  }
 
-  if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
-  if (e.key === 'ArrowLeft' || e.key === 'PageUp') previous();
+  // Navigation normale pour les slides non-Gag ou "gelées"
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') previous();
 });
 
 document.getElementById('fullscreenToggle').addEventListener('click', () => {
-  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-  else document.exitFullscreen();
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
 });
 
 </script>
