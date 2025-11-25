@@ -1,451 +1,275 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="fr">
 <head>
-
 <meta charset="UTF-8" />
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>HTML5 Slides</title>
-
+<title>HTML5 Slides - Infinite Gag</title>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
 
-
-
 <style>
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html, body { width: 100%; height: 100%; overflow: hidden; background: #111; color: #fff; font-family: 'Raleway', sans-serif; }
 
-
-
   .slides { width: 100%; height: 100%; position: relative; overflow: hidden; }
-
   .slide { width: 100%; height: 100%; position: absolute; top: 0; display: flex; flex-direction: column; justify-content: center; padding: 4rem; transition: transform 0.6s ease; }
 
-
-
   .content-box { max-width: 50%; z-index: 2; }
-
-  .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; }
-
+  .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; text-transform: uppercase; letter-spacing: 2px;}
   .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; }
-
   .content-box h3 { font-size: 1.2rem; opacity: 0.9; margin-top: 0.3rem; text-align: left; }
-
   .content-box p { font-size: 1rem; margin-top: 1rem; opacity: 0.85; line-height: 1.4; text-align: left; }
+  
+  /* Style spécifique pour les citations académiques (User Preference) */
+  .quote-ref { font-variant: small-caps; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #444; padding-top: 0.5rem; display: inline-block;}
 
+  .image-box { 
+    position: absolute; 
+    right: 0; top: 0; 
+    width: 55%; height: 100%; 
+    background-size: cover; background-position: center; 
+    opacity: 0.8; 
+    z-index: 1; 
+  }
 
-
-  .image-box { position: absolute; right: 0; top: 0; width: 55%; height: 100%; background-size: cover; background-position: center; opacity: 0.8; }
-
-
-
-  /* Bullet list slide */
-
+  /* Bullet list slide style */
   .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
-
+  
+  .fullscreen-button {
+    position: fixed; top: 15px; right: 15px; z-index: 100;
+    cursor: pointer; background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+    padding: 5px 12px; border-radius: 4px; font-size: 0.8rem;
+    transition: opacity 0.3s ease, background 0.3s ease; opacity: 0.5;
+  }
+  .fullscreen-button:hover { opacity: 1; background: rgba(255, 255, 255, 0.2); }
 </style>
-
 </head>
 
-
-
 <body>
-
 <div class="slides" id="slides">
 
-
-
   <section class="slide" style="background:#111;">
-
     <div class="content-box">
-
       <h2>Préhistoire et Anticipation</h2>
-
-      <h1>La Préhistoire dessine-t-elle les limites 
-
-       <br>
-
-       du récit spéculatif ?</h1>
-
+      <h1>La Préhistoire dessine-t-elle les limites <br>du récit spéculatif ?</h1>
       <h3>Benjamin Efrati - Doctorant CRAL - EHESS/CNRS</h3>
-
       <p>Time World - 4.12.2025 - Besançon</p>
-
     </div>
-
     <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true');"></span>
-
   </section>
 
-
-
-   <section class="slide" style="background:#111;">
-
+  <section class="slide" style="background:#111;">
     <div class="content-box">
-
       <h2>Préhistoire et Anticipation</h2>
-
-      <h1>La Préhistoire dessine-t-elle les limites du récit spéculatif ?</h1>
-
+      <h1>Contexte Historique</h1>
       <h3>Retour au XIXe siècle</h3>
-
-      <p>Avec l'émergence de l'archéologie préhistorique, les "curiositiés antédilluviennes" nous ont donné accès à un imaginaire du temps profond. 
-
-       <br>
-
-       C'est cette nouvelle dimension de la pensée spéculative qui rendra possibie l'éclosion du récit de genre d'anticipation.
-
+      <p>Avec l'émergence de l'archéologie préhistorique, les "curiosités antédiluviennes" nous ont donné accès à un imaginaire du temps profond.</p>
     </div>
-
     <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
-
   </section>
 
- 
-
- <section class="slide" style="background:#111;">
-
+  <section class="slide" style="background:#111;">
     <div class="content-box">
-
       <h2>1.1</h2>
-
       <h1>Échos d'Horizon</h1>
-
       <h3>Fragments d’un futur discret</h3>
-
-      <p>Dans un monde flottant entre certitude et mirage, les mots se tissent en réseaux fluides, révélant des perspectives inattendues.</p>
-
+      <p>Dans un monde flottant entre certitude et mirage, les mots se tissent en réseaux fluides.</p>
     </div>
-
     <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
-
   </section>
 
-
-
-  <section class="slide" style="background:#111;">
-
+  <section class="slide gag-slide" style="background:#111;">
     <div class="content-box">
-
-      <h2>1.2</h2>
-
-      <h1>Clarté Silencieuse</h1>
-
-      <h3>Les formes du visible</h3>
-
-      <p>Les contours se dissipent tandis que la lumière révèle l’essence du mouvement, laissant aux ombres le soin de compléter le sens.</p>
-
-    </div>
-
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
-
-  </section>
-
-
-
-  <section class="slide" style="background:#111;">
-
-    <div class="content-box">
-
-      <h2>5.7</h2>
-
-      <h1>Réseaux du Crépuscule</h1>
-
-      <h3>Cartographie intérieure</h3>
-
-      <p>À mesure que la frontière se dissout, les connexions se reforment, révélant des trajectoires que la logique seule ne pouvait tracer.</p>
-
-    </div>
-
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9d/Daniel%27s_vision_of_the_four_beasts_from_the_sea_and_the_Ancient_of_Days_-_Silos_Apocalypse_%281109%29%2C_f.240_-_BL_Add_MS_11695.jpg');"></span>
-
-  </section>
-
-
-
-  <!-- Animated bullet slide (users add bullets with Right/Down; press Up to finalize and create a new slide) -->
-
-  <section class="slide" id="bulletSlide" style="background:#111;">
-
-    <div class="content-box">
-
-      <h2>9.4</h2>
-
+      <h2>Analyse Systémique</h2>
       <h1>Points Essentiels</h1>
-
-      <ul class="bullet-list" id="bulletList"></ul>
-
-      <p style="margin-top:1rem; opacity:0.6; font-size:0.9rem;">→ Ajouter un point : Flèche droite / ↓ &nbsp;&nbsp; ↑ Finaliser et créer une nouvelle diapo</p>
-
+      <ul class="bullet-list"></ul>
+      <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">
+        → Ajouter point : Flèche Droite / Bas <br>
+        ↑ Sortir de la boucle et continuer la conférence
+      </p>
     </div>
-
   </section>
-
-
 
 </div>
 
-
+<button id="fullscreenToggle" class="fullscreen-button">Plein Écran</button>
 
 <script>
+// --- CONFIGURATION ---
+const IMG_GITHUB = 'https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true';
+const BATCH_SIZE = 10; // Nombre de diapos générées après la liste
+let globalSlideCounter = 1; // Pour les titres incrémentiels
 
+// --- ETAT GLOBAL ---
 let slides = Array.from(document.querySelectorAll('.slide'));
-
 let index = 0;
 
-const bulletList = document.getElementById('bulletList');
-
+// Phrases aléatoires pour le "Bullshit Bingo" des puces
 const randomBullets = [
-
   "Le réseau révèle l’invisible.",
-
-  "Chaque transition expose un détail.",
-
   "La structure donne sens au mouvement.",
-
   "Les systèmes émergent du chaos.",
-
   "La perception façonne la réalité.",
-
-  "Innovative synergy pathways",
-
-  "Adaptive workflow iteration"
-
+  "Synergie des vecteurs cognitifs.",
+  "Itération des paradigmes fossiles.",
+  "Convergence des temporalités."
 ];
 
-let bulletFrozen = false;
-
-
-
+// Initialisation
 function layoutSlides() {
-
   slides.forEach((slide, i) => {
-
     slide.style.transform = `translateX(${(i - index) * 100}%)`;
-
   });
-
 }
-
 layoutSlides();
 
-
-
-function gotoSlide(n) {
-
-  if (n < 0) n = 0;
-
-  if (n > slides.length - 1) n = slides.length - 1;
-
-  index = n;
-
-  layoutSlides();
-
-}
-
-
-
+// --- NAVIGATION ---
 function next() {
-
+  // Si on est sur une slide normale, on avance
   if (index < slides.length - 1) {
-
     index++;
-
     layoutSlides();
-
-    return;
-
+  } else {
+    // Si on est à la toute fin (normalement c'est une gag-slide active), 
+    // on appelle la fonction d'ajout de puce
+    let currentSlide = slides[index];
+    if (currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
+      addBullet(currentSlide);
+    }
   }
-
-  // if on last slide (bullet slide) and not frozen => add bullet
-
-  if (index === slides.length - 1 && !bulletFrozen) addBullet();
-
 }
-
-
 
 function previous() {
-
   if (index > 0) {
-
     index--;
-
     layoutSlides();
+  }
+}
 
+// --- LOGIQUE DU GAG (Liste à puces) ---
+
+function addBullet(slideElement) {
+  const list = slideElement.querySelector('.bullet-list');
+  const text = randomBullets[Math.floor(Math.random() * randomBullets.length)];
+  const li = document.createElement('li');
+  li.textContent = text;
+  list.appendChild(li);
+  // Animation fade-in
+  requestAnimationFrame(() => { li.style.opacity = 1; });
+}
+
+// Fonction appelée par la FLÈCHE HAUT sur une gag-slide
+function triggerBatchGeneration(currentSlideElement) {
+  // 1. On "gèle" la slide actuelle pour qu'elle ne reçoive plus de puces
+  currentSlideElement.classList.add('frozen');
+  const list = currentSlideElement.querySelector('.bullet-list');
+  if(list) list.style.opacity = 0.5; // Feedback visuel
+
+  // 2. On génère 10 slides normales
+  for (let i = 0; i < BATCH_SIZE; i++) {
+    createNormalSlide();
   }
 
-}
+  // 3. On génère UNE nouvelle slide "Gag" à la fin pour la prochaine fois
+  createGagSlide();
 
-
-
-function addBullet() {
-
-  const text = randomBullets[Math.floor(Math.random() * randomBullets.length)];
-
-  const li = document.createElement('li');
-
-  li.textContent = text;
-
-  bulletList.appendChild(li);
-
-  // trigger fade-in
-
-  requestAnimationFrame(() => { li.style.opacity = 1; });
-
-}
-
-
-
-function finalizeBulletsAndCreateSlide() {
-
-  if (bulletFrozen) return;
-
-  bulletFrozen = true; // prevent further bullets
-
-  // dim list slightly to show it's frozen
-
-  bulletList.style.opacity = 0.6;
-
-
-
-  // create a new slide DOM element
-
-  const newSection = document.createElement('section');
-
-  newSection.className = 'slide';
-
-  newSection.style.background = '#111';
-
-
-
-  // generate simple incremental title based on count
-
-  const num = slides.length + 1;
-
-  const h2 = (num < 10) ? `0.${num}` : `${num}.0`;
-
-
-
-  const titles = [
-
-    'Nouvelle Perspective', 'Itinéraire Synthétique', 'Observation Libre', 'Cadre d’Idées'
-
-  ];
-
-  const subs = [
-
-    'Exploration additionnelle', 'Nouvelle fenêtre', 'Approfondissement', 'Bilan rapide'
-
-  ];
-
-  const paras = [
-
-    'Un aperçu généré automatiquement pour poursuivre la narration et garder le flux d’idées.',
-
-    'Contenu provisoire créé après validation des points clés, modifiable à loisir.',
-
-    'Slide générée: ajoutez images et texte pour compléter la présentation.'
-
-  ];
-
-
-
-  newSection.innerHTML = `
-
-    <div class="content-box">
-
-      <h2>${h2}</h2>
-
-      <h1>${titles[Math.floor(Math.random()*titles.length)]}</h1>
-
-      <h3>${subs[Math.floor(Math.random()*subs.length)]}</h3>
-
-      <p>${paras[Math.floor(Math.random()*paras.length)]}</p>
-
-    </div>
-
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0d/Orthodox-Apocalypse-Fresco.jpg=${Date.now()}');"></span>
-
-  `;
-
-
-
-  document.getElementById('slides').appendChild(newSection);
-
-
-
-  // refresh slides array and go to the new slide
-
+  // 4. On met à jour le tableau des slides
   slides = Array.from(document.querySelectorAll('.slide'));
 
-  index = slides.length - 1;
-
+  // 5. On passe automatiquement à la première slide nouvellement créée
+  index++; 
   layoutSlides();
-
 }
 
+// --- GÉNÉRATEURS DE DOM ---
 
+function createNormalSlide() {
+  const section = document.createElement('section');
+  section.className = 'slide';
+  section.style.background = '#111';
+  
+  // Titre incrémentiel
+  const titleNum = globalSlideCounter++;
+  
+  // Contenu générique
+  section.innerHTML = `
+    <div class="content-box">
+      <h2>Vérification séquentielle</h2>
+      <h1>Diapositive de contrôle #${titleNum}</h1>
+      <h3>Données brutes via GitHub Blob</h3>
+      <p>Cette diapositive permet de vérifier la stabilité du flux narratif après interruption par la liste infinie.</p>
+      <div class="quote-ref">EFRATI B. 2025, Notes de terrain, Besançon.</div>
+    </div>
+    <span class="image-box" style="background-image:url('${IMG_GITHUB}');"></span>
+  `;
+  
+  document.getElementById('slides').appendChild(section);
+}
+
+function createGagSlide() {
+  const section = document.createElement('section');
+  section.className = 'slide gag-slide'; // Importante classe pour la logique
+  section.style.background = '#111';
+  
+  section.innerHTML = `
+    <div class="content-box">
+      <h2>Retour de l'Analyse</h2>
+      <h1>Points Essentiels (Suite)</h1>
+      <ul class="bullet-list"></ul>
+      <p style="margin-top:2rem; opacity:0.5; font-size:0.8rem; border-top:1px solid #333; padding-top:0.5rem;">
+        → Ajouter point : Flèche Droite / Bas <br>
+        ↑ Sortir de la boucle et continuer
+      </p>
+    </div>
+  `;
+  
+  document.getElementById('slides').appendChild(section);
+}
+
+// --- CONTRÔLES CLAVIER ---
 
 window.addEventListener('keydown', e => {
-
-  // Fullscreen toggle (F)
-
+  // Plein écran (F)
   if (e.key.toLowerCase() === 'f') {
-
     if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-
     else document.exitFullscreen();
-
     return;
-
   }
 
+  const currentSlide = slides[index];
+  const isGagSlide = currentSlide.classList.contains('gag-slide');
+  const isFrozen = currentSlide.classList.contains('frozen');
 
-
-  // If on bullet slide
-
-  if (index === slides.length - 1) {
-
-    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === 'ArrowDown') {
-
-      // add bullet
-
-      addBullet();
-
-      return;
-
+  // CAS 1 : On est sur une Slide "Gag" active
+  if (isGagSlide && !isFrozen) {
+    // Ajouter une puce
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+      addBullet(currentSlide);
+      return; 
     }
-
+    // SORTIE DE BOUCLE (Générer la suite)
     if (e.key === 'ArrowUp') {
-
-      // finalize and create new slide
-
-      finalizeBulletsAndCreateSlide();
-
+      triggerBatchGeneration(currentSlide);
       return;
-
     }
-
+    // Retour en arrière autorisé
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      previous();
+      return;
+    }
   }
 
-
-
-  // normal navigation
-
+  // CAS 2 : Navigation normale (Slides classiques ou Gag slide gelée)
   if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
-
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') previous();
+});
 
+// Bouton UI Fullscreen
+document.getElementById('fullscreenToggle').addEventListener('click', () => {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
 });
 
 </script>
-
 </body>
-
 </html>
