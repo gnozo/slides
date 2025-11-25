@@ -11,27 +11,54 @@
   html, body { width: 100%; height: 100%; overflow: hidden; background: #111; color: #fff; font-family: 'Raleway', sans-serif; }
 
   .slides { width: 100%; height: 100%; position: relative; overflow: hidden; }
-  .slide { width: 100%; height: 100%; position: absolute; top: 0; display: flex; flex-direction: column; justify-content: center; padding: 4rem; transition: transform 0.6s ease; }
+  
+  .slide { 
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    /* Flexbox used for vertical centering only */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    /* Removed padding to strictly control horizontal margins via content-box */
+    padding: 0; 
+    transition: transform 0.6s ease; 
+  }
 
-  .content-box { max-width: 50%; z-index: 2; }
+  .content-box { 
+    /* STRICT SPAN CALCULATION:
+       Total Width: 100%
+       Image Width: 55% (Occupies right side)
+       Gap required: 10%
+       Left Margin required: 10%
+       
+       Remaining Width for Text = 100% - 55% - 10% - 10% = 25%
+    */
+    width: 25%; 
+    margin-left: 10%; /* 10% from left border */
+    margin-right: auto; /* Pushes away from the right side */
+    z-index: 2; 
+    position: relative; /* Ensures z-index works */
+  }
+
   .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; text-transform: uppercase; letter-spacing: 2px;}
-  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; }
+  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; word-wrap: break-word; } /* Added word-wrap for safety */
   .content-box h3 { font-size: 1.2rem; opacity: 0.9; margin-top: 0.3rem; text-align: left; }
   .content-box p { font-size: 1rem; margin-top: 1rem; opacity: 0.85; line-height: 1.4; text-align: left; }
   
-  /* Style spécifique pour les citations académiques (User Preference) */
   .quote-ref { font-variant: small-caps; font-size: 0.8rem; margin-top: 2rem; border-top: 1px solid #444; padding-top: 0.5rem; display: inline-block;}
 
   .image-box { 
     position: absolute; 
     right: 0; top: 0; 
-    width: 55%; height: 100%; 
+    width: 55%; /* Fixed width */
+    height: 100%; 
     background-size: cover; background-position: center; 
     opacity: 0.8; 
     z-index: 1; 
   }
 
-  /* Bullet list slide style */
   .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
   
   .fullscreen-button {
@@ -64,7 +91,7 @@
       <h1>Contexte Historique</h1>
       <h3>Retour au XIXe siècle</h3>
       <p>Avec l'émergence de l'archéologie préhistorique, les "curiosités antédiluviennes" nous ont donné accès à un imaginaire du temps profond.</p>
-      <p>Ce dernier s'impose d'abord comme une alternative à l'imaginaire biblique, mais il reste chargé d'allusions aux prophéties apoicalyptiques et catastrophes créationnistes.</p>
+      <p>Ce dernier s'impose d'abord comme une alternative à l'imaginaire biblique, mais il reste chargé d'allusions aux prophéties apocalyptiques et catastrophes créationnistes.</p>
     </div>
     <span class="image-box" style="background-image:url('https://github.com/gnozo/slides/blob/main/img/silos.jpg?raw=true');"></span>
   </section>
@@ -126,13 +153,10 @@ layoutSlides();
 
 // --- NAVIGATION ---
 function next() {
-  // Si on est sur une slide normale, on avance
   if (index < slides.length - 1) {
     index++;
     layoutSlides();
   } else {
-    // Si on est à la toute fin (normalement c'est une gag-slide active), 
-    // on appelle la fonction d'ajout de puce
     let currentSlide = slides[index];
     if (currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
       addBullet(currentSlide);
@@ -155,29 +179,21 @@ function addBullet(slideElement) {
   const li = document.createElement('li');
   li.textContent = text;
   list.appendChild(li);
-  // Animation fade-in
   requestAnimationFrame(() => { li.style.opacity = 1; });
 }
 
-// Fonction appelée par la FLÈCHE HAUT sur une gag-slide
 function triggerBatchGeneration(currentSlideElement) {
-  // 1. On "gèle" la slide actuelle pour qu'elle ne reçoive plus de puces
   currentSlideElement.classList.add('frozen');
   const list = currentSlideElement.querySelector('.bullet-list');
-  if(list) list.style.opacity = 0.5; // Feedback visuel
+  if(list) list.style.opacity = 0.5;
 
-  // 2. On génère 10 slides normales
   for (let i = 0; i < BATCH_SIZE; i++) {
     createNormalSlide();
   }
 
-  // 3. On génère UNE nouvelle slide "Gag" à la fin pour la prochaine fois
   createGagSlide();
 
-  // 4. On met à jour le tableau des slides
   slides = Array.from(document.querySelectorAll('.slide'));
-
-  // 5. On passe automatiquement à la première slide nouvellement créée
   index++; 
   layoutSlides();
 }
@@ -189,14 +205,12 @@ function createNormalSlide() {
   section.className = 'slide';
   section.style.background = '#111';
   
-  // Titre incrémentiel
   const titleNum = globalSlideCounter++;
   
-  // Contenu générique
   section.innerHTML = `
     <div class="content-box">
       <h2>Vérification séquentielle</h2>
-      <h1>Préhistoire et Anticipation#${titleNum}</h1>
+      <h1>Préhistoire et Anticipation #${titleNum}</h1>
       <h3>Suite et fin</h3>
       <p>Merci pour votre attention..</p>
       <div class="quote-ref">EFRATI B. 2025, Notes de terrain, Besançon.</div>
@@ -209,7 +223,7 @@ function createNormalSlide() {
 
 function createGagSlide() {
   const section = document.createElement('section');
-  section.className = 'slide gag-slide'; // Importante classe pour la logique
+  section.className = 'slide gag-slide';
   section.style.background = '#111';
   
   section.innerHTML = `
@@ -230,7 +244,6 @@ function createGagSlide() {
 // --- CONTRÔLES CLAVIER ---
 
 window.addEventListener('keydown', e => {
-  // Plein écran (F)
   if (e.key.toLowerCase() === 'f') {
     if (!document.fullscreenElement) document.documentElement.requestFullscreen();
     else document.exitFullscreen();
@@ -241,31 +254,25 @@ window.addEventListener('keydown', e => {
   const isGagSlide = currentSlide.classList.contains('gag-slide');
   const isFrozen = currentSlide.classList.contains('frozen');
 
-  // CAS 1 : On est sur une Slide "Gag" active
   if (isGagSlide && !isFrozen) {
-    // Ajouter une puce
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
       addBullet(currentSlide);
       return; 
     }
-    // SORTIE DE BOUCLE (Générer la suite)
     if (e.key === 'ArrowUp') {
       triggerBatchGeneration(currentSlide);
       return;
     }
-    // Retour en arrière autorisé
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
       previous();
       return;
     }
   }
 
-  // CAS 2 : Navigation normale (Slides classiques ou Gag slide gelée)
   if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
   if (e.key === 'ArrowLeft' || e.key === 'PageUp') previous();
 });
 
-// Bouton UI Fullscreen
 document.getElementById('fullscreenToggle').addEventListener('click', () => {
   if (!document.fullscreenElement) document.documentElement.requestFullscreen();
   else document.exitFullscreen();
