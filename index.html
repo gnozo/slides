@@ -17,33 +17,23 @@
     height: 100%; 
     position: absolute; 
     top: 0; 
-    /* Flexbox used for vertical centering only */
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
-    /* Removed padding to strictly control horizontal margins via content-box */
     padding: 0; 
     transition: transform 0.6s ease; 
   }
 
   .content-box { 
-    /* STRICT SPAN CALCULATION:
-       Total Width: 100%
-       Image Width: 55% (Occupies right side)
-       Gap required: 10%
-       Left Margin required: 10%
-       
-       Remaining Width for Text = 100% - 55% - 10% - 10% = 25%
-    */
     width: 25%; 
-    margin-left: 10%; /* 10% from left border */
-    margin-right: auto; /* Pushes away from the right side */
+    margin-left: 10%; 
+    margin-right: auto; 
     z-index: 2; 
-    position: relative; /* Ensures z-index works */
+    position: relative; 
   }
 
   .content-box h2 { font-size: 1rem; opacity: 0.6; text-align: left; text-transform: uppercase; letter-spacing: 2px;}
-  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; word-wrap: break-word; } /* Added word-wrap for safety */
+  .content-box h1 { font-size: 2rem; margin-top: 0.5rem; text-align: left; word-wrap: break-word; }
   .content-box h3 { font-size: 1.2rem; opacity: 0.9; margin-top: 0.3rem; text-align: left; }
   .content-box p { font-size: 1rem; margin-top: 1rem; opacity: 0.85; line-height: 1.4; text-align: left; }
   
@@ -52,7 +42,7 @@
   .image-box { 
     position: absolute; 
     right: 0; top: 0; 
-    width: 55%; /* Fixed width */
+    width: 55%; 
     height: 100%; 
     background-size: cover; background-position: center; 
     opacity: 0.8; 
@@ -143,9 +133,11 @@
 
 <script>
 // --- CONFIGURATION & TEMPLATES ---
-const IMG_GITHUB = 'https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true';
+// NOTE : J'utilise ici l'URL que vous avez fournie. Si les images ne s'affichent toujours pas,
+// c'est que cette URL est bloquée ou instable (problème fréquent avec GitHub pour l'hébergement d'images).
+// Testez avec une autre image stable si besoin.
+const IMG_GITHUB = 'https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true'; 
 const BATCH_SIZE = 10; // Nombre de diapos générées après la liste
-let globalSlideCounter = 1; // Pour les titres incrémentiels
 
 // Phrases aléatoires pour le "Bullshit Bingo" des puces
 const randomBullets = [
@@ -158,7 +150,7 @@ const randomBullets = [
   "Convergence des temporalités."
 ];
 
-// NOUVEAU : Tableau des templates de Gag Slides pour réutilisation facile
+// Tableau des templates de Gag Slides pour réutilisation facile
 const GAG_SLIDE_TEMPLATES = [
   { 
     H2: "Analyse Systémique",
@@ -170,12 +162,10 @@ const GAG_SLIDE_TEMPLATES = [
     H1: "Réseaux Sémantiques (2)",
     INSTRUCTIONS: `→ Poursuivre la déconstruction. <br> ↑ Stabiliser et progresser`
   },
-  // Ajoutez d'autres Gag Slides ici en copiant/collant ce bloc
 ];
 let currentGagTemplateIndex = 0;
 
 // --- ETAT GLOBAL ---
-// Initialisation faite ici pour s'assurer que l'array est prêt
 let slides = Array.from(document.querySelectorAll('.slide'));
 let index = 0;
 
@@ -207,22 +197,24 @@ function layoutSlides() {
 
 // Lancement des fonctions initiales
 initializeGagSlides();
-layoutSlides(); // Appel initial après l'initialisation de l'array 'slides'
+layoutSlides();
 
 
 function next() {
   updateSlidesArray(); 
   
-  // Si on est sur une slide normale, on avance
+  const currentSlide = slides[index];
+  
+  // Logique Gag Slide : Si on est sur une Gag Slide active et qu'on fait "Next"
+  if (currentSlide && currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
+    addBullet(currentSlide);
+    return; // Bloque la navigation normale pour ajouter une puce
+  }
+
+  // Logique Navigation Normale : Avancer
   if (index < slides.length - 1) {
     index++;
     layoutSlides();
-  } else {
-    // Si on est à la toute fin, vérifier si c'est une gag-slide non 'gelée' (active)
-    let currentSlide = slides[index];
-    if (currentSlide.classList.contains('gag-slide') && !currentSlide.classList.contains('frozen')) {
-      addBullet(currentSlide);
-    }
   }
 }
 
@@ -249,12 +241,12 @@ function triggerBatchGeneration(currentSlideElement) {
   const list = currentSlideElement.querySelector('.bullet-list');
   if(list) list.style.opacity = 0.5;
 
-  // Trouver l'index de la prochaine gag slide à utiliser
+  // Trouver l'index de la prochaine gag slide à utiliser (rotation)
   currentGagTemplateIndex = (currentGagTemplateIndex + 1) % GAG_SLIDE_TEMPLATES.length;
 
   // 1. Créer le lot de slides normales
   for (let i = 0; i < BATCH_SIZE; i++) {
-    createNormalSlide();
+    createNormalSlide(slides.length + i + 1); // Utilise la longueur actuelle + offset pour le titre
   }
   
   // 2. Créer la prochaine Gag Slide (pour le prochain cycle)
@@ -263,19 +255,21 @@ function triggerBatchGeneration(currentSlideElement) {
   // Mettre à jour l'array des slides APRÈS la création des éléments
   updateSlidesArray(); 
 
-  // On passe automatiquement à la première slide nouvellement créée
+  // On passe automatiquement à la première slide nouvellement créée (qui est la slide index + 1)
   index++; 
   layoutSlides();
 }
 
 // --- GÉNÉRATEURS DE DOM ---
 
-function createNormalSlide() {
+// J'ai retiré 'globalSlideCounter' et utilise slides.length pour déterminer le numéro.
+function createNormalSlide(slideNum) {
   const section = document.createElement('section');
   section.className = 'slide';
   section.style.background = '#111';
   
-  const titleNum = globalSlideCounter++;
+  // Le numéro de slide est maintenant basé sur le paramètre 'slideNum'
+  const titleNum = slideNum; 
   
   section.innerHTML = `
     <div class="content-box">
@@ -322,12 +316,11 @@ window.addEventListener('keydown', e => {
     return;
   }
 
-  // On s'assure que slides est toujours à jour pour un contrôle clavier immédiat
   updateSlidesArray(); 
   
   const currentSlide = slides[index];
-  const isGagSlide = currentSlide.classList.contains('gag-slide');
-  const isFrozen = currentSlide.classList.contains('frozen');
+  const isGagSlide = currentSlide && currentSlide.classList.contains('gag-slide');
+  const isFrozen = currentSlide && currentSlide.classList.contains('frozen');
 
   if (isGagSlide && !isFrozen) {
     // Comportement des puces (Flèches Droite/Bas)
