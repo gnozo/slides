@@ -26,17 +26,11 @@
     width: 55%; 
     height: 100%; 
     background-size: cover; 
-    background-position: center; 
+    background-position: center; /* Centrage de l'image de fond */
     opacity: 0.8; 
-    /* TEST DE VISIBILITÉ: Si l'élément est là, il sera rouge. */
-    background-color: red !important; 
+    z-index: 1; /* Assure que l'image est en arrière-plan du texte */
   }
 
-  /* Cache l'élément image-box pour la première slide de test */
-  .slide:first-child .image-box {
-      display: none;
-  }
-  
   /* Bullet list slide */
   .bullet-list li { opacity: 0; transition: opacity 0.4s ease; font-size: 1.4rem; margin: 1rem 0; }
 
@@ -77,7 +71,7 @@
       <h3>Benjamin Efrati - Doctorant CRAL - EHESS/CNRS</h3>
       <p>Time World - 4.12.2025 - Besançon</p>
     </div>
-    <img src="https://github.com/gnozo/slides/blob/main/img/Lascaux1.jpg?raw=true" style="position: absolute; right: 0; top: 0; width: 55%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 1;">
+        <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Pelecypoda_-_Palaeontology_and_Geology_-_Geological_Survey_of_Queensland.jpg');"></span>
   </section>
 
    <section class="slide" style="background:#111;">
@@ -89,7 +83,7 @@
        <br>
        C'est cette nouvelle dimension de la pensée spéculative qui rendra possibie l'éclosion du récit de genre d'anticipation.
     </div>
-        <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/91/Megatherium.jpg');"></span>
+    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/91/Megatherium.jpg');"></span>
   </section>
  
  <section class="slide" style="background:#111;">
@@ -118,8 +112,7 @@
       <h1>Réseaux du Crépuscule</h1>
       <h3>Cartographie intérieure</h3>
       <p>À mesure que la frontière se dissout, les connexions se reforment, révélant des trajectoires que la logique seule ne pouvait tracer.</p>
-    </div>
-    <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/91/Megatherium.jpg');"></span>
+      <p class="quote">GENESTE J.-M. et al. 1989, Les Hauts Lieux de la Préhistoire en France, Paris, Bordas.</p>
   </section>
 
     <section class="slide" id="bulletSlide" style="background:#111;">
@@ -129,6 +122,7 @@
       <ul class="bullet-list" id="bulletList"></ul>
       <p style="margin-top:1rem; opacity:0.6; font-size:0.9rem;">→ Ajouter un point : Flèche droite / ↓ &nbsp;&nbsp; ↑ Finaliser et créer une nouvelle diapo</p>
     </div>
+        <span class="image-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/91/Megatherium.jpg');"></span>
   </section>
 
 </div>
